@@ -28,7 +28,7 @@
 <meta name="twitter:title" content="psr354 | Cybersecurity Portfolio">
 <meta name="twitter:description" content="CTF Player • Security Researcher • Student @ SMKN 40 Jakarta">
 <meta name="twitter:image" content="https://psr354.github.io/Portofolio/og-image.png">
-  
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -120,7 +120,7 @@
   ]
 }
 </script>
-  
+
   <style>
     :root {
       --bg: #0d1117;
@@ -135,9 +135,9 @@
       --border: #30363d;
       --card-bg: #1c2128;
     }
-    
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    
+
     body {
       font-family: 'Fira Code', monospace;
       background: var(--bg);
@@ -145,16 +145,16 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
-    
+
     a { color: var(--accent); text-decoration: none; transition: 0.2s; }
     a:hover { color: var(--accent-hover); }
-    
+
     .container {
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 2rem;
     }
-    
+
     /* Header / Hero */
     header {
       min-height: 100vh;
@@ -166,7 +166,7 @@
       padding: 2rem 1rem;
       background: radial-gradient(ellipse at bottom, #1b2735 0%, var(--bg) 70%);
     }
-    
+
     .terminal-header {
       background: var(--bg-secondary);
       border: 1px solid var(--border);
@@ -177,13 +177,13 @@
       width: 100%;
       box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
-    
+
     .terminal-title {
       display: flex;
       gap: 8px;
       margin-bottom: 1rem;
     }
-    
+
     .terminal-dot {
       width: 12px;
       height: 12px;
@@ -192,17 +192,17 @@
     .terminal-dot.red { background: #ff5f56; }
     .terminal-dot.yellow { background: #ffbd2e; }
     .terminal-dot.green { background: #27ca40; }
-    
+
     .terminal-content {
       font-size: 0.95rem;
       color: var(--text);
       text-align: left;
     }
-    
+
     .terminal-content .prompt { color: var(--success); }
     .terminal-content .command { color: var(--accent); }
     .terminal-content .output { color: var(--text-muted); margin-left: 1.5rem; }
-    
+
     .typing {
       border-right: 2px solid var(--accent);
       white-space: nowrap;
@@ -210,9 +210,9 @@
       animation: blink 0.7s infinite;
       display: inline-block;
     }
-    
+
     @keyframes blink { 50% { border-color: transparent; } }
-    
+
     h1 {
       font-size: 2.5rem;
       margin-bottom: 0.5rem;
@@ -221,20 +221,20 @@
       -webkit-text-fill-color: transparent;
       font-weight: 600;
     }
-    
+
     .subtitle {
       font-size: 1.2rem;
       color: var(--text-muted);
       margin-bottom: 2rem;
     }
-    
+
     .cta-buttons {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
       justify-content: center;
     }
-    
+
     .btn {
       padding: 0.75rem 1.5rem;
       background: var(--accent);
@@ -246,7 +246,7 @@
       transition: 0.2s;
       font-family: inherit;
     }
-    
+
     .btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
     .btn-outline {
       background: transparent;
@@ -254,15 +254,15 @@
       color: var(--accent);
     }
     .btn-outline:hover { background: var(--accent); color: var(--bg); }
-    
+
     /* Sections */
     section {
       padding: 5rem 0;
       border-bottom: 1px solid var(--border);
     }
-    
+
     section:last-child { border-bottom: none; }
-    
+
     .section-title {
       font-size: 1.8rem;
       margin-bottom: 2rem;
@@ -270,39 +270,39 @@
       align-items: center;
       gap: 0.5rem;
     }
-    
+
     .section-title::before {
       content: ">";
       color: var(--success);
       font-weight: bold;
     }
-    
+
     /* About */
     .about-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
     }
-    
+
     .about-card {
       background: var(--card-bg);
       padding: 1.5rem;
       border-radius: 8px;
       border: 1px solid var(--border);
     }
-    
+
     .about-card h4 {
       color: var(--accent);
       margin-bottom: 0.5rem;
     }
-    
+
     /* Skills */
     .skills-grid {
       display: flex;
       flex-wrap: wrap;
       gap: 0.75rem;
     }
-    
+
     .skill-badge {
       background: var(--bg-secondary);
       padding: 0.5rem 1rem;
@@ -311,16 +311,16 @@
       border: 1px solid var(--border);
       transition: 0.2s;
     }
-    
+
     .skill-badge:hover {
       border-color: var(--accent);
       transform: translateY(-2px);
     }
-    
+
     .skill-category {
       margin-bottom: 2rem;
     }
-    
+
     .skill-category h4 {
       color: var(--text-muted);
       font-size: 1rem;
@@ -328,14 +328,14 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-    
+
     /* Achievements */
     .achievements-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
     }
-    
+
     .achievement-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -345,7 +345,7 @@
       position: relative;
       overflow: hidden;
     }
-    
+
     .achievement-card::before {
       content: "";
       position: absolute;
@@ -355,17 +355,17 @@
       height: 100%;
       background: var(--accent);
     }
-    
+
     .achievement-card.gold::before { background: var(--warning); }
     .achievement-card.silver::before { background: #c0c0c0; }
     .achievement-card.bronze::before { background: #cd7f32; }
-    
+
     .achievement-card:hover {
       border-color: var(--accent);
       transform: translateY(-4px);
       box-shadow: 0 8px 30px rgba(0,0,0,0.4);
     }
-    
+
     .achievement-rank {
       display: inline-block;
       padding: 0.25rem 0.75rem;
@@ -375,38 +375,75 @@
       margin-bottom: 0.75rem;
       font-weight: 500;
     }
-    
+
     .achievement-rank.top1 { color: var(--warning); }
     .achievement-rank.top2 { color: #c0c0c0; }
     .achievement-rank.top3 { color: #cd7f32; }
     .achievement-rank.top5, .achievement-rank.top9 { color: var(--accent); }
     .achievement-rank.finalist { color: var(--text); }
-    
+
     .achievement-card h3 {
       margin-bottom: 0.5rem;
       font-size: 1.2rem;
     }
-    
+
     .achievement-card p {
       color: var(--text-muted);
       font-size: 0.9rem;
       margin-bottom: 0.5rem;
     }
-    
+
     .achievement-meta {
       display: flex;
       gap: 1rem;
       font-size: 0.85rem;
       color: var(--text-muted);
     }
-    
+
+    /* Certificate Button */
+    .cert-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1rem;
+      padding: 0.4rem 0.9rem;
+      background: rgba(88, 166, 255, 0.1);
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .cert-link:hover {
+      background: var(--accent);
+      color: var(--bg);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(88, 166, 255, 0.3);
+    }
+
+    .cert-link.disabled {
+      border-color: var(--border);
+      color: var(--text-muted);
+      background: var(--bg-secondary);
+      cursor: not-allowed;
+    }
+
+    .cert-link.disabled:hover {
+      transform: none;
+      box-shadow: none;
+      background: var(--bg-secondary);
+      color: var(--text-muted);
+    }
+
     /* Projects */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
     }
-    
+
     .project-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -414,33 +451,33 @@
       padding: 1.5rem;
       transition: 0.3s;
     }
-    
+
     .project-card:hover {
       border-color: var(--accent);
       transform: translateY(-4px);
       box-shadow: 0 8px 30px rgba(0,0,0,0.4);
     }
-    
+
     .project-card h3 {
       margin-bottom: 0.5rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-    
+
     .project-card p {
       color: var(--text-muted);
       font-size: 0.95rem;
       margin-bottom: 1rem;
     }
-    
+
     .project-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
       margin-bottom: 1rem;
     }
-    
+
     .project-tag {
       font-size: 0.8rem;
       padding: 0.25rem 0.75rem;
@@ -448,25 +485,25 @@
       border-radius: 4px;
       color: var(--text-muted);
     }
-    
+
     .project-tag.vuln {
       background: rgba(248, 81, 73, 0.15);
       color: var(--danger);
       border: 1px solid var(--danger);
     }
-    
+
     .project-links {
       display: flex;
       gap: 1rem;
     }
-    
+
     .project-links a {
       font-size: 0.9rem;
       display: flex;
       align-items: center;
       gap: 0.25rem;
     }
-    
+
     /* Contact */
     .contact-links {
       display: flex;
@@ -474,7 +511,7 @@
       gap: 1rem;
       justify-content: center;
     }
-    
+
     .contact-btn {
       display: flex;
       align-items: center;
@@ -486,18 +523,18 @@
       color: var(--text);
       transition: 0.2s;
     }
-    
+
     .contact-btn:hover {
       border-color: var(--accent);
       background: var(--card-bg);
     }
-    
+
     .contact-btn svg {
       width: 18px;
       height: 18px;
       fill: currentColor;
     }
-    
+
     /* Footer */
     footer {
       text-align: center;
@@ -506,14 +543,14 @@
       font-size: 0.9rem;
       border-top: 1px solid var(--border);
     }
-    
+
     footer code {
       background: var(--bg-secondary);
       padding: 0.2rem 0.5rem;
       border-radius: 4px;
       color: var(--accent);
     }
-    
+
     /* Responsive */
     @media (max-width: 768px) {
       h1 { font-size: 2rem; }
@@ -542,10 +579,10 @@
         <div class="output">• PWN & Reverse Engineering<br>• Web Exploitation (SQLi, XSS, File Upload)<br>• Forensics & DFIR</div>
       </div>
     </div>
-    
+
     <h1>psr354</h1>
     <p class="subtitle">Azzam Azhim Muntazhar • Cybersecurity Enthusiast • CTF Player • Student @ SMKN 40 Jakarta</p>
-    
+
     <div class="cta-buttons">
       <a href="#achievements" class="btn">View Achievements</a>
       <a href="#projects" class="btn btn-outline">View Projects</a>
@@ -582,7 +619,7 @@
   <section id="skills">
     <div class="container">
       <h2 class="section-title">Skills & Tools</h2>
-      
+
       <div class="skill-category">
         <h4>Languages & Shells</h4>
         <div class="skills-grid">
@@ -595,7 +632,7 @@
           <span class="skill-badge">PHP</span>
         </div>
       </div>
-      
+
       <div class="skill-category">
         <h4>Security Tools</h4>
         <div class="skills-grid">
@@ -609,7 +646,7 @@
           <span class="skill-badge">Nmap</span>
         </div>
       </div>
-      
+
       <div class="skill-category">
         <h4>Platforms & OS</h4>
         <div class="skills-grid">
@@ -628,7 +665,7 @@
     <div class="container">
       <h2 class="section-title">Achievements & Competitions</h2>
       <div class="achievements-grid">
-        
+
         <!-- Achievement 1: FGTE 0 - Juara 1 -->
         <div class="achievement-card gold">
           <span class="achievement-rank top1">🥇 1st Place</span>
@@ -638,8 +675,11 @@
             <span>🏆 Winner</span>
             <span>📅 2026</span>
           </div>
+          <a href="cert/1st - Azzam Azhim Muntazhar.pdf" target="_blank" class="cert-link">
+            📜 View Certificate
+          </a>
         </div>
-        
+
         <!-- Achievement 2: LKS - Juara 2 -->
         <div class="achievement-card silver">
           <span class="achievement-rank top2">🥈 2nd Place</span>
@@ -649,8 +689,11 @@
             <span>🏆 Runner-up</span>
             <span>📅 2026</span>
           </div>
+          <a href="cert/lks.jpeg" target="_blank" class="cert-link">
+            📜 View Certificate
+          </a>
         </div>
-        
+
         <!-- Achievement 3: Astro CTF - 5th -->
         <div class="achievement-card bronze">
           <span class="achievement-rank top5">🏅 5th Place</span>
@@ -660,8 +703,11 @@
             <span>🎓 Univ. Nurul Fikri</span>
             <span>📅 2025</span>
           </div>
+          <a href="cert/astro.pdf" target="_blank" class="cert-link">
+            📜 View Certificate
+          </a>
         </div>
-        
+
         <!-- Achievement 4: Hackena Ramadhan CTF - Top 9 -->
         <div class="achievement-card">
           <span class="achievement-rank top9">🏆 Top 9</span>
@@ -671,8 +717,11 @@
             <span>🔐 HackerOne</span>
             <span>📅 Ramadhan 2026</span>
           </div>
+          <a href="cert/hackena.jpeg" target="_blank" class="cert-link">
+            📜 View Certificate
+          </a>
         </div>
-        
+
         <!-- Achievement 5: Ionic CTF - Top 9 -->
         <div class="achievement-card">
           <span class="achievement-rank top9">🏆 Top 9</span>
@@ -682,8 +731,11 @@
             <span>🎓 ITS Surabaya</span>
             <span>📅 2025</span>
           </div>
+          <a href="cert/ionic.jpeg" target="_blank" class="cert-link">
+            📜 View Certificate
+          </a>
         </div>
-        
+
         <!-- Achievement 6: Waskita Manunggal Siber - Finalist -->
         <div class="achievement-card">
           <span class="achievement-rank finalist">🎯 Finalist</span>
@@ -693,8 +745,11 @@
             <span>🏢 Waskita</span>
             <span>📅 2026</span>
           </div>
+          <a href="cert/WMS.pdf" target="_blank" class="cert-link">
+            📜 View Certificate
+          </a>
         </div>
-        
+
         <!-- Achievement 7: CyberWave 2.0 - 2nd Place -->
         <div class="achievement-card silver">
           <span class="achievement-rank top2">🥈 2nd Place</span>
@@ -707,8 +762,11 @@
           <p style="margin-top: 0.75rem; font-style: italic; color: var(--text-muted); font-size: 0.85rem;">
             "kata fiko ini pemanasan"
           </p>
+          <span class="cert-link disabled" title="Sertifikat belum tersedia">
+            📜 Certificate Coming Soon
+          </span>
         </div>
-        
+
         <!-- Achievement 8: CyberBreaker Season 3 - Top 15 -->
         <div class="achievement-card">
           <span class="achievement-rank top9">🏆 Top 15</span>
@@ -718,8 +776,11 @@
             <span>👥 Team: NR - Salazhar</span>
             <span>📅 2026</span>
           </div>
+          <span class="cert-link disabled" title="Sertifikat belum tersedia">
+            📜 Certificate Coming Soon
+          </span>
         </div>
-        
+
       </div>
     </div>
   </section>
@@ -729,7 +790,7 @@
     <div class="container">
       <h2 class="section-title">Projects & Labs</h2>
       <div class="projects-grid">
-        
+
         <!-- Project 1: Lab B2R -->
         <div class="project-card">
           <h3>🧪 Lab B2R</h3>
@@ -745,7 +806,7 @@
             <a href="#" onclick="alert('⚠️ Lab ini untuk edukasi. Jangan gunakan untuk aktivitas ilegal!'); return false;">⚠️ Disclaimer</a>
           </div>
         </div>
-        
+
         <!-- Project 2: Write-Up-CTF -->
         <div class="project-card">
           <h3>📚 Write-Up-CTF</h3>
@@ -762,7 +823,7 @@
             <a href="https://github.com/Psr354/Write-Up-CTF" target="_blank">📖 Read</a>
           </div>
         </div>
-        
+
         <!-- Project 3: Portfolio Website -->
         <div class="project-card">
           <h3>💻 Portfolio Website</h3>
@@ -778,7 +839,7 @@
             <a href="https://psr354.github.io/portfolio" target="_blank">🌐 Live</a>
           </div>
         </div>
-        
+
         <!-- Project 4: ctf-helper (Placeholder) -->
         <div class="project-card">
           <h3>🔧 ctf-helper</h3>
@@ -792,7 +853,7 @@
             <a href="#" onclick="alert('🚧 Coming Soon!'); return false;">🔗 Coming Soon</a>
           </div>
         </div>
-        
+
       </div>
     </div>
   </section>
@@ -804,7 +865,7 @@
       <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">
         Feel free to reach out if you want to discuss CTFs, security research, or just say hi! 👋
       </p>
-      
+
       <div class="contact-links">
         <a href="https://github.com/Psr354" target="_blank" class="contact-btn">
           <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
@@ -842,15 +903,15 @@
       "Security Researcher in Training",
       "Kali Linux Enthusiast 🐧"
     ];
-    
+
     let textIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
     const typewriter = document.getElementById('typewriter');
-    
+
     function type() {
       const currentText = texts[textIndex];
-      
+
       if (isDeleting) {
         typewriter.textContent = currentText.substring(0, charIndex - 1);
         charIndex--;
@@ -858,9 +919,9 @@
         typewriter.textContent = currentText.substring(0, charIndex + 1);
         charIndex++;
       }
-      
+
       let typeSpeed = isDeleting ? 50 : 100;
-      
+
       if (!isDeleting && charIndex === currentText.length) {
         typeSpeed = 2000; // Pause at end
         isDeleting = true;
@@ -869,13 +930,13 @@
         textIndex = (textIndex + 1) % texts.length;
         typeSpeed = 500;
       }
-      
+
       setTimeout(type, typeSpeed);
     }
-    
+
     // Start typing effect after page load
     document.addEventListener('DOMContentLoaded', type);
-    
+
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
