@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://psr354.github.io/Portofolio/sitemap.xml
