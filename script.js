@@ -159,11 +159,24 @@ function initCursorEffect() {
   document.body.append(canvas, cursor);
   document.documentElement.classList.add('custom-cursor-active');
 
-  const context = canvas.getContext('2d');
-  const pointCount = 30;
-  const points = Array.from({ length: pointCount }, () => ({ x: -100, y: -100 }));
+  const context = canvas.getContext('2d', { alpha: true, desynchronized: true });
+  const trailStep = 8;
+  const trailPointCount = 28;
+  const trailLayers = [
+    { reach: 0.22, width: 36, alpha: 0.25 },
+    { reach: 0.38, width: 30, alpha: 0.26 },
+    { reach: 0.54, width: 23, alpha: 0.28 },
+    { reach: 0.69, width: 16, alpha: 0.31 },
+    { reach: 0.83, width: 10, alpha: 0.37 },
+    { reach: 0.94, width: 5.5, alpha: 0.45 },
+    { reach: 1, width: 2, alpha: 0.66 }
+  ];
+  const trailPoints = Array.from({ length: trailPointCount }, () => ({ x: -100, y: -100 }));
+  const history = [];
   let targetX = -100;
   let targetY = -100;
+  let cursorX = -100;
+  let cursorY = -100;
   let cursorFrame = null;
   let initialized = false;
   let lastMoveTime = 0;
@@ -175,92 +188,97 @@ function initCursorEffect() {
     canvas.width = Math.round(document.documentElement.clientWidth * pixelRatio);
     canvas.height = Math.round(window.innerHeight * pixelRatio);
     context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    context.imageSmoothingEnabled = true;
   };
 
-  const drawTrail = () => {
+  const sampleTrail = now => {
+    let historyIndex = history.length - 1;
+
+    for (let index = 0; index < trailPointCount; index++) {
+      const sampleTime = now - index * trailStep;
+      while (historyIndex > 0 && history[historyIndex - 1].time > sampleTime) {
+        historyIndex--;
+      }
+
+      const newer = history[historyIndex];
+      const older = history[Math.max(historyIndex - 1, 0)];
+      const duration = Math.max(newer.time - older.time, 1);
+      const mix = Math.min(Math.max((newer.time - sampleTime) / duration, 0), 1);
+      trailPoints[index].x = newer.x + (older.x - newer.x) * mix;
+      trailPoints[index].y = newer.y + (older.y - newer.y) * mix;
+    }
+  };
+
+  const traceCurve = count => {
+    context.beginPath();
+    context.moveTo(trailPoints[0].x, trailPoints[0].y);
+
+    for (let index = 1; index < count - 1; index++) {
+      const point = trailPoints[index];
+      const next = trailPoints[index + 1];
+      context.quadraticCurveTo(
+        point.x,
+        point.y,
+        (point.x + next.x) * 0.5,
+        (point.y + next.y) * 0.5
+      );
+    }
+
+    const last = trailPoints[count - 1];
+    context.lineTo(last.x, last.y);
+  };
+
+  const drawTrail = now => {
     context.clearRect(0, 0, document.documentElement.clientWidth, window.innerHeight);
     if (trailOpacity < 0.01) return;
 
-    const leftEdge = [];
-    const rightEdge = [];
-
-    points.forEach((point, index) => {
-      const previous = points[Math.max(index - 1, 0)];
-      const next = points[Math.min(index + 1, pointCount - 1)];
-      const tangentX = previous.x - next.x;
-      const tangentY = previous.y - next.y;
-      const tangentLength = Math.hypot(tangentX, tangentY) || 1;
-      const normalX = -tangentY / tangentLength;
-      const normalY = tangentX / tangentLength;
-      const headRatio = 1 - index / (pointCount - 1);
-      const halfWidth = 0.25 + Math.pow(headRatio, 1.55) * 12;
-
-      leftEdge.push({
-        x: point.x + normalX * halfWidth,
-        y: point.y + normalY * halfWidth
-      });
-      rightEdge.push({
-        x: point.x - normalX * halfWidth,
-        y: point.y - normalY * halfWidth
-      });
-    });
-
-    const tail = points[pointCount - 1];
-    const head = points[0];
+    sampleTrail(now);
+    const tail = trailPoints[trailPointCount - 1];
+    const head = trailPoints[0];
     const gradient = context.createLinearGradient(tail.x, tail.y, head.x, head.y);
     gradient.addColorStop(0, 'rgba(29, 78, 216, 0)');
-    gradient.addColorStop(0.28, `rgba(37, 99, 235, ${0.13 * trailOpacity})`);
-    gradient.addColorStop(0.52, `rgba(88, 166, 255, ${0.24 * trailOpacity})`);
-    gradient.addColorStop(0.72, `rgba(129, 140, 248, ${0.38 * trailOpacity})`);
-    gradient.addColorStop(0.88, `rgba(34, 211, 238, ${0.55 * trailOpacity})`);
-    gradient.addColorStop(1, `rgba(147, 197, 253, ${0.78 * trailOpacity})`);
-
-    const traceSmoothEdge = (edge, moveToStart = true) => {
-      if (moveToStart) context.moveTo(edge[0].x, edge[0].y);
-      else context.lineTo(edge[0].x, edge[0].y);
-      for (let index = 1; index < edge.length - 1; index++) {
-        const point = edge[index];
-        const next = edge[index + 1];
-        const midpointX = (point.x + next.x) * 0.5;
-        const midpointY = (point.y + next.y) * 0.5;
-        context.quadraticCurveTo(point.x, point.y, midpointX, midpointY);
-      }
-      const last = edge[edge.length - 1];
-      context.lineTo(last.x, last.y);
-    };
+    gradient.addColorStop(0.3, 'rgba(37, 99, 235, 0.18)');
+    gradient.addColorStop(0.58, 'rgba(88, 166, 255, 0.42)');
+    gradient.addColorStop(0.8, 'rgba(129, 140, 248, 0.64)');
+    gradient.addColorStop(1, 'rgba(34, 211, 238, 0.92)');
 
     context.save();
-    context.beginPath();
-    traceSmoothEdge(leftEdge);
-    traceSmoothEdge([...rightEdge].reverse(), false);
-    context.closePath();
-    context.fillStyle = gradient;
-    context.shadowColor = `rgba(34, 211, 238, ${0.42 * trailOpacity})`;
-    context.shadowBlur = 8;
-    context.fill();
+    context.lineCap = 'round';
+    context.lineJoin = 'round';
+    context.strokeStyle = gradient;
+    trailLayers.forEach(layer => {
+      const count = Math.max(2, Math.ceil(trailPointCount * layer.reach));
+      traceCurve(count);
+      context.lineWidth = layer.width;
+      context.globalAlpha = layer.alpha * trailOpacity;
+      context.stroke();
+    });
     context.restore();
   };
 
   const renderCursor = now => {
-    const delta = Math.min(Math.max((now - lastFrameTime) / 16.667, 0.5), 2);
+    const deltaSeconds = Math.min(Math.max((now - lastFrameTime) / 1000, 1 / 240), 1 / 30);
     lastFrameTime = now;
-    const headFollow = 1 - Math.pow(1 - 0.22, delta);
-    points[0].x += (targetX - points[0].x) * headFollow;
-    points[0].y += (targetY - points[0].y) * headFollow;
+    const headFollow = 1 - Math.exp(-58 * deltaSeconds);
+    cursorX += (targetX - cursorX) * headFollow;
+    cursorY += (targetY - cursorY) * headFollow;
 
-    for (let index = 1; index < pointCount; index++) {
-      const baseStrength = 0.27 - (index / pointCount) * 0.13;
-      const followStrength = 1 - Math.pow(1 - baseStrength, delta);
-      points[index].x += (points[index - 1].x - points[index].x) * followStrength;
-      points[index].y += (points[index - 1].y - points[index].y) * followStrength;
+    const latest = history[history.length - 1];
+    if (!latest || now - latest.time >= 4 || Math.hypot(cursorX - latest.x, cursorY - latest.y) > 0.1) {
+      history.push({ x: cursorX, y: cursorY, time: now });
+    }
+    while (history.length > 2 && history[1].time < now - trailStep * (trailPointCount + 8)) {
+      history.shift();
     }
 
-    cursor.style.transform = `translate3d(${points[0].x}px, ${points[0].y}px, 0) translate(-50%, -50%)`;
-    trailOpacity += ((performance.now() - lastMoveTime < 75 ? 1 : 0) - trailOpacity) * 0.12;
-    drawTrail();
+    cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+    const remainingDistance = Math.hypot(targetX - cursorX, targetY - cursorY);
+    const targetOpacity = now - lastMoveTime < 105 || remainingDistance > 0.35 ? 1 : 0;
+    const opacityRate = targetOpacity ? 18 : 7;
+    trailOpacity += (targetOpacity - trailOpacity) * (1 - Math.exp(-opacityRate * deltaSeconds));
+    drawTrail(now);
 
-    const remainingDistance = Math.abs(targetX - points[0].x) + Math.abs(targetY - points[0].y);
-    if (remainingDistance > 0.08 || trailOpacity > 0.01) {
+    if (remainingDistance > 0.04 || trailOpacity > 0.01) {
       cursorFrame = requestAnimationFrame(renderCursor);
     } else {
       canvas.classList.remove('is-visible');
@@ -269,24 +287,40 @@ function initCursorEffect() {
   };
 
   window.addEventListener('pointermove', event => {
+    const samples = event.getCoalescedEvents?.() || [event];
+    const latestSample = samples[samples.length - 1];
+    const now = performance.now();
+
     if (!initialized) {
-      points.forEach(point => {
-        point.x = event.clientX;
-        point.y = event.clientY;
-      });
+      cursorX = latestSample.clientX;
+      cursorY = latestSample.clientY;
+      for (let index = trailPointCount - 1; index >= 0; index--) {
+        history.push({ x: cursorX, y: cursorY, time: now - index * trailStep });
+      }
       initialized = true;
+    } else if (now - lastMoveTime > 180) {
+      cursorX = latestSample.clientX;
+      cursorY = latestSample.clientY;
+      history.length = 0;
+      for (let index = trailPointCount - 1; index >= 0; index--) {
+        history.push({ x: cursorX, y: cursorY, time: now - index * trailStep });
+      }
     }
 
-    targetX = event.clientX;
-    targetY = event.clientY;
-    lastMoveTime = performance.now();
+    targetX = latestSample.clientX;
+    targetY = latestSample.clientY;
+    lastMoveTime = now;
     cursor.classList.add('is-visible');
     canvas.classList.add('is-visible');
     cursor.classList.toggle('is-interactive', Boolean(event.target.closest('a, button')));
-    if (!cursorFrame) cursorFrame = requestAnimationFrame(renderCursor);
+    if (!cursorFrame) {
+      lastFrameTime = now;
+      cursorFrame = requestAnimationFrame(renderCursor);
+    }
   }, { passive: true });
 
   document.documentElement.addEventListener('mouseleave', () => {
+    lastMoveTime = 0;
     cursor.classList.remove('is-visible');
     canvas.classList.remove('is-visible');
   });
