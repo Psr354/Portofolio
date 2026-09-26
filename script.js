@@ -2,9 +2,11 @@
 const texts = [
   "Azzam Azhim Muntazhar",
   "psr354",
-  "CTF Player | NR - Salazhar",
-  "Cybersecurity Student",
-  "PWN • Web • Forensics"
+  "Cybersecurity Enthusiast",
+  "CTF Player",
+  "Penetration Tester",
+  "Bug Hunter",
+  "Web Developer"
 ];
 
 let textIndex = 0;
