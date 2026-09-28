@@ -71,6 +71,27 @@ function initScrollReveal() {
   targets.forEach(target => observer.observe(target));
 }
 
+function initAchievementFilters() {
+  const filters = document.querySelectorAll('.achievement-filter');
+  const cards = document.querySelectorAll('.achievement-card[data-category]');
+
+  filters.forEach(filter => {
+    filter.addEventListener('click', () => {
+      const selectedCategory = filter.dataset.filter;
+
+      filters.forEach(item => {
+        const isActive = item === filter;
+        item.classList.toggle('is-active', isActive);
+        item.setAttribute('aria-pressed', String(isActive));
+      });
+
+      cards.forEach(card => {
+        card.hidden = selectedCategory !== 'all' && card.dataset.category !== selectedCategory;
+      });
+    });
+  });
+}
+
 function initScrollProgress() {
   const track = document.createElement('div');
   const fill = document.createElement('div');
@@ -335,6 +356,7 @@ function initCursorEffect() {
 document.addEventListener('DOMContentLoaded', () => {
   type();
   initScrollReveal();
+  initAchievementFilters();
   initScrollProgress();
   initCursorEffect();
 });

@@ -134,6 +134,18 @@
           "name": "2nd Place - TryHards Launching CTF",
           "url": "https://psr354.github.io/Portofolio/#achievements",
           "dateCreated": "2026-08-29"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "BMKG Vulnerability Disclosure Recognition",
+          "url": "https://psr354.github.io/Portofolio/#achievements",
+          "dateCreated": "2026"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Jogja Vulnerability Disclosure Recognition",
+          "url": "https://psr354.github.io/Portofolio/#achievements",
+          "dateCreated": "2026"
         }
       ],
       "sameAs": [
@@ -227,7 +239,7 @@
           </div>
         </div>
         <div class="hero-stats" aria-label="Achievement summary">
-          <div class="stat"><strong>10</strong><span>verified achievements</span></div>
+          <div class="stat"><strong>12</strong><span>verified achievements</span></div>
           <div class="stat"><strong>3</strong><span>competition levels</span></div>
           <div class="stat"><strong>6</strong><span>selected projects</span></div>
         </div>
@@ -259,9 +271,14 @@
   <section id="achievements">
     <div class="container">
       <h2 class="section-title">Achievements & Competitions</h2>
+      <div class="achievement-filters" role="group" aria-label="Filter achievements by category">
+        <button class="achievement-filter is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="achievement-filter" type="button" data-filter="ctf" aria-pressed="false">CTF</button>
+        <button class="achievement-filter" type="button" data-filter="vdp" aria-pressed="false">VDP</button>
+      </div>
       <div class="achievements-grid">
 
-        <div class="achievement-card gold">
+        <div class="achievement-card gold" data-category="ctf">
           <span class="achievement-rank top1">1st Place</span>
           <h3>FGTE 0 CTF</h3>
           <p>Secured first place in the FGTE 0 CTF competition, held from March 7 to 14, 2026.</p>
@@ -269,7 +286,7 @@
           <a href="cert/1st - Azzam Azhim Muntazhar.pdf" target="_blank" rel="noopener noreferrer" class="cert-link">View certificate</a>
         </div>
 
-        <div class="achievement-card silver">
+        <div class="achievement-card silver" data-category="ctf">
           <span class="achievement-rank top2">2nd Place</span>
           <h3>LKS Cybersecurity</h3>
           <p>Placed second in the Cybersecurity category of the East Jakarta City Student Competency Competition.</p>
@@ -277,7 +294,7 @@
             <a href="cert/lks.jpeg?v=upright-20260917" target="_blank" rel="noopener noreferrer" class="cert-link">View certificate</a>
         </div>
 
-        <div class="achievement-card silver">
+        <div class="achievement-card silver" data-category="ctf">
           <span class="achievement-rank top2">2nd Place + First Blood</span>
           <h3>TryHards CTF</h3>
           <p>Won second place with team digendong kac0 and secured first blood on one of the hard challenges.</p>
@@ -288,7 +305,7 @@
           </div>
         </div>
 
-        <div class="achievement-card silver">
+        <div class="achievement-card silver" data-category="ctf">
           <span class="achievement-rank top2">2nd Place</span>
           <h3>Cyber Wave V2</h3>
           <p>Placed second in an online cybersecurity competition with team NR - Kata Fiko Ini Pendinginan Setelah LKS.</p>
@@ -296,7 +313,7 @@
           <a href="cert/cyberwave2.jpeg" target="_blank" rel="noopener noreferrer" class="cert-link">View certificate</a>
         </div>
 
-        <div class="achievement-card">
+        <div class="achievement-card" data-category="ctf">
           <span class="achievement-rank finalist">Finalist</span>
           <h3>Waskita Manunggal Siber 2026</h3>
           <p>Reached the open-category final with NR - Salazhar in the Indonesian Army Cyber Center CTF, where the final used a King of the Hill format.</p>
@@ -306,7 +323,7 @@
           </div>
         </div>
 
-        <div class="achievement-card">
+        <div class="achievement-card" data-category="ctf">
           <span class="achievement-rank finalist">Finalist</span>
           <h3>Meta4sec 3.0 CTF</h3>
           <p>Selected as a finalist in the Meta4sec 3.0 CTF organized by Meta4sec in collaboration with Redlimit Academy.</p>
@@ -314,7 +331,7 @@
           <a href="cert/Azzam Azhim Muntazhar meta4sec finalis.pdf" target="_blank" rel="noopener noreferrer" class="cert-link">View certificate</a>
         </div>
 
-        <div class="achievement-card">
+        <div class="achievement-card" data-category="ctf">
           <span class="achievement-rank top9">Top 10 Regional & National</span>
           <h3>Cyber Breaker 2026 - Season 3</h3>
           <p>With NR - Salazhar, placed 10th among 306 teams in the Java Regional round, then 10th among 33 teams at CBD National, qualifying for Promotion Day.</p>
@@ -326,7 +343,7 @@
           </div>
         </div>
 
-        <div class="achievement-card bronze">
+        <div class="achievement-card bronze" data-category="ctf">
           <span class="achievement-rank top5">5th Place</span>
           <h3>Astro Competition 7.0 CTF</h3>
           <p>As captain of team kata pak jum digendong tadeo, placed fifth with 5,700 points in the Capture The Flag category.</p>
@@ -337,7 +354,7 @@
           </div>
         </div>
 
-        <div class="achievement-card">
+        <div class="achievement-card" data-category="ctf">
           <span class="achievement-rank top9">9th Place Internationally</span>
           <h3>Hackena Ramadan CTF</h3>
           <p>Team Salazhar placed ninth with 5,920 points in an international two-person CTF organized by Hackena and sponsored by the HackerOne Egypt Community.</p>
@@ -345,7 +362,7 @@
           <a href="cert/hackena.jpeg" target="_blank" rel="noopener noreferrer" class="cert-link">Placement evidence</a>
         </div>
 
-        <div class="achievement-card">
+        <div class="achievement-card" data-category="ctf">
           <span class="achievement-rank top9">9th Place / Finalist</span>
           <h3>IONIC 2025 - Cyber Security</h3>
           <p>Team Salazhar placed ninth in the qualifiers and advanced as one of ten national finalists in the Cyber Security category.</p>
@@ -354,6 +371,22 @@
             <a href="cert/ionic.jpeg" target="_blank" rel="noopener noreferrer" class="cert-link">View certificate</a>
             <a href="cert/Penilaian CTF QUALS IONIC 2025.pdf" target="_blank" rel="noopener noreferrer" class="cert-link">Placement evidence</a>
           </div>
+        </div>
+
+        <div class="achievement-card vdp" data-category="vdp">
+          <span class="achievement-rank disclosure">VDP</span>
+          <h3>BMKG Vulnerability Disclosure</h3>
+          <p>Recognized for responsibly reporting a security vulnerability through the BMKG vulnerability disclosure channel.</p>
+          <div class="achievement-meta"><span>BMKG</span><span>2026</span></div>
+          <a href="cert/bmkg cert.pdf" target="_blank" rel="noopener noreferrer" class="cert-link">View certificate</a>
+        </div>
+
+        <div class="achievement-card vdp" data-category="vdp">
+          <span class="achievement-rank disclosure">VDP</span>
+          <h3>Jogja Vulnerability Disclosure</h3>
+          <p>Recognized for responsibly reporting a security vulnerability through a Jogja vulnerability disclosure program.</p>
+          <div class="achievement-meta"><span>Jogja</span><span>2026</span></div>
+          <a href="cert/jogja cert.jpeg" target="_blank" rel="noopener noreferrer" class="cert-link">View certificate</a>
         </div>
 
       </div>
